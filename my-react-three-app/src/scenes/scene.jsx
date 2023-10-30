@@ -1,19 +1,22 @@
-import React, { useRef } from 'react';
+import React, { useRef, Suspense } from 'react';
 import { Canvas } from 'react-three-fiber';
 import { angleToRadians } from '../utils/angle';
-import { PerspectiveCamera } from 'drei';
+import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 function Scene() {
   const sphereRef = useRef();
 
   return (
     <>
     <Canvas>
-      {/* <PerspectiveCamera makeDefault position={[angleToRadians(90),0,0]}></PerspectiveCamera> */}
-      <mesh ref={sphereRef}>
-        <sphereGeometry args={[1, 32,32]} />
+
+      <PerspectiveCamera makeDefault position={[0,1,5]}/>
+      <OrbitControls/>
+      {/* Ball */}
+      <mesh ref={sphereRef} position={[0,0.5,0]}>
+        <sphereGeometry args={[0.5,32,32]} />
         <meshStandardMaterial color="red" />
       </mesh>
-      <mesh rotation={[(angleToRadians(75)),0,0]}>
+      <mesh rotation={[-(angleToRadians(90)),0,0]}>
         <planeGeometry args={[7,7]}></planeGeometry>
         <meshStandardMaterial color="Pink"></meshStandardMaterial>
       </mesh>
