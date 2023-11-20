@@ -3,6 +3,13 @@ import { Physics } from "@react-three/rapier";
 import Player from "../Objects/sphereCharacterV2";
 import { Ground } from "../Objects/ground";
 import { Canvas } from "react-three-fiber";
+import Maze from "../Objects/maze.jsx";
+import {MazeGenerator} from "../utils/mazeGenerator.ts"
+
+const mazeRows = 50;
+const mazeCols = 50;
+const mazeGenerator = new MazeGenerator(mazeRows, mazeCols);
+const mazeData = mazeGenerator.generateMaze();
 
 function DreiScene() {
   console.log('He creado dreiscene');
@@ -26,6 +33,7 @@ function DreiScene() {
       <Ground/>
       {/* end of floor */}
       <Player/>
+      <Maze mazeData={mazeData}/>
     </Physics>
     <PointerLockControls />
     </Canvas>
