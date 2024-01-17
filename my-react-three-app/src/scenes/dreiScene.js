@@ -6,13 +6,12 @@ import { Canvas } from "react-three-fiber";
 import Maze from "../Objects/maze.jsx";
 import {MazeGenerator} from "../utils/mazeGenerator.ts"
 
-const mazeRows = 50;
-const mazeCols = 50;
+const mazeRows = 51;
+const mazeCols = 51;
 const mazeGenerator = new MazeGenerator(mazeRows, mazeCols);
 const mazeData = mazeGenerator.generateMaze();
 
 function DreiScene() {
-  console.log('He creado dreiscene');
   return(
   <KeyboardControls
     map={[

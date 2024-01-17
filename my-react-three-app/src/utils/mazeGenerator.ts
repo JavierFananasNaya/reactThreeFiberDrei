@@ -18,9 +18,7 @@ export class MazeGenerator {
   }
 
   generateMaze() {
-    this.recursiveBacktracking(0, 0);
-    this.connectEntrances();
-    this.printMaze();
+    this.recursiveBacktracking(1,1);
     return this.grid;
   }
 
@@ -46,22 +44,6 @@ export class MazeGenerator {
     }
   }
 
-  private connectEntrances() {
-    // Connect the top and bottom entrances
-    const topEntrance = { x: Math.floor(Math.random() * this.width), y: 0 };
-    const bottomEntrance = {
-      x: Math.floor(Math.random() * this.width),
-      y: this.height - 1,
-    };
-
-    this.grid[topEntrance.y][topEntrance.x] = 1;
-    this.grid[bottomEntrance.y][bottomEntrance.x] = 1;
-
-    // Connect the entrances with a path
-    const pathX = topEntrance.x + Math.sign(bottomEntrance.x - topEntrance.x);
-    this.grid[topEntrance.y + 1][pathX] = 1;
-  }
-
   private shuffle<T>(array: T[]): T[] {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -73,11 +55,4 @@ export class MazeGenerator {
   private isInside(x: number, y: number): boolean {
     return x >= 0 && x < this.width && y >= 0 && y < this.height;
   }
-
-  printMaze() {
-    for (let row of this.grid) {
-      console.log(row.map((cell) => (cell === 1 ? "1" : "0")).join(""));
-    }
-  }
 }
-
