@@ -28,7 +28,6 @@ const Maze = ({ mazeData }) => {
             attach="material"
             map={colorMap} 
             normalMap={normalMap} 
-            displacementScale={0.2}
           />
         </Box>
       ) : null
