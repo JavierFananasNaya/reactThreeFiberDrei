@@ -1,7 +1,7 @@
 import { KeyboardControls, Sky,PointerLockControls } from "@react-three/drei";
 import { Physics } from "@react-three/rapier";
 import Player from "../Objects/sphereCharacterV2";
-import { Ground } from "../Objects/ground";
+import { Ground } from "../Objects/ground.jsx";
 import { Canvas } from "react-three-fiber";
 import Maze from "../Objects/maze.jsx";
 import {MazeGenerator} from "../utils/mazeGenerator.ts"
@@ -24,9 +24,9 @@ function DreiScene() {
   >
     <Canvas shadows camera={{ fov: 45 }}>
     <Sky sunPosition={[100, 20, 100]} />
-    <ambientLight intensity={0.3}></ambientLight>
+    <ambientLight intensity={0.4}></ambientLight>
     {/* <pointLight castShadow intensity={0.8} position={[100, 100, 100]} />*/}
-    <directionalLight castShadow intensity={0.8} position={[100,100,100]}></directionalLight>
+    <directionalLight castShadow intensity={0.2} position={[100,100,100]}></directionalLight>
     <Physics gravity={[0, 0, 0]}>
       {/* floor (need to make a component for the floor) */}
       <Ground/>
