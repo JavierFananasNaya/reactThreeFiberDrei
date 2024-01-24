@@ -1,9 +1,8 @@
+import diffuse from '../assets/bricks/diffuse_bricks.jpg'
+import normals from '../assets/bricks/normals_bricks.jpg'
+
 import React, { useRef } from "react";
 import { Box, useTexture } from "@react-three/drei";
-import diffuse from '../assets/bricks/diffuse_bricks.jpg'
-import normals from '../assets/bricks/diffuse_bricks.jpg'
-import displacement from '../assets/bricks/diffuse_bricks.jpg'
-import specular from '../assets/bricks/diffuse_bricks.jpg'
 
 const Maze = ({ mazeData }) => {
   const mazeRef = useRef();
@@ -11,11 +10,9 @@ const Maze = ({ mazeData }) => {
   // Define the size of the cubes (walls)
   const cubeSize = 1;
 
-  const [colorMap, normalMap, displacementMap, specularMap] = useTexture([
+  const [colorMap, normalMap] = useTexture([
     diffuse,
-    normals,
-    displacement,
-    specular
+    normals
   ]);
   
   // Map the maze data to 3D cubes
@@ -31,8 +28,6 @@ const Maze = ({ mazeData }) => {
             attach="material"
             map={colorMap} 
             normalMap={normalMap} 
-            displacementMap={displacementMap} 
-            specular={specularMap}
             displacementScale={0.2}
           />
         </Box>
