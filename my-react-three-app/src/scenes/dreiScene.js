@@ -5,11 +5,13 @@ import { Ground } from "../Objects/ground.jsx";
 import { Canvas } from "react-three-fiber";
 import Maze from "../Objects/maze.jsx";
 import {MazeGenerator} from "../utils/mazeGenerator.ts"
+import {getPlayerInitialPosition} from "../utils/utils.ts"
 
 const mazeRows = 51;
 const mazeCols = 51;
 const mazeGenerator = new MazeGenerator(mazeRows, mazeCols);
 const mazeData = mazeGenerator.generateMaze();
+const playerInitialPosition = getPlayerInitialPosition(mazeData[1])
 
 function DreiScene() {
   return(
@@ -31,7 +33,7 @@ function DreiScene() {
       {/* floor (need to make a component for the floor) */}
       <Ground/>
       {/* end of floor */}
-      <Player/>
+      <Player initialPosition={playerInitialPosition} />
       <Maze mazeData={mazeData}/>
     </Physics>
     <PointerLockControls />

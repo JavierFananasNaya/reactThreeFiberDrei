@@ -12,7 +12,7 @@ export function Ground(props) {
     normals
   ]);
 
-  const tilingScale = 150
+  const tilingScale = 500
 
   colorMap = setTextureTiling(colorMap, tilingScale)
   normalMap = setTextureTiling(normalMap, tilingScale)
@@ -20,7 +20,7 @@ export function Ground(props) {
 
   return (
     <RigidBody {...props} type="fixed" colliders={false}>
-      <mesh receiveShadow position={[0, -10, 0]} rotation-x={-Math.PI / 2}>
+      <mesh receiveShadow position={[0, -0.5, 0]} rotation-x={-Math.PI / 2}>
         <planeGeometry args={[1000, 1000]} />
         <meshStandardMaterial
             attach="material"

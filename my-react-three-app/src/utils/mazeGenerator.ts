@@ -1,3 +1,10 @@
+const directions = [
+  { dx: 0, dy: -2 }, // Up
+  { dx: 0, dy: 2 }, // Down
+  { dx: -2, dy: 0 }, // Left
+  { dx: 2, dy: 0 }, // Right
+];
+
 export class MazeGenerator {
   width: number;
   height: number;
@@ -18,18 +25,11 @@ export class MazeGenerator {
   }
 
   generateMaze() {
-    this.recursiveBacktracking(1,1);
+    this.recursiveBacktracking(1, 1);
     return this.grid;
   }
 
   private recursiveBacktracking(x: number, y: number) {
-    const directions = [
-      { dx: 0, dy: -2 }, // Up
-      { dx: 0, dy: 2 }, // Down
-      { dx: -2, dy: 0 }, // Left
-      { dx: 2, dy: 0 }, // Right
-    ];
-
     this.grid[y][x] = 1; // Mark the current cell as visited
 
     for (const dir of this.shuffle(directions)) {
