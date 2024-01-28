@@ -22,6 +22,8 @@ const Maze = ({ mazeData }) => {
             key={`${rowIndex}-${colIndex}`}
             args={[cubeSize, cubeSize, cubeSize]}
             position={[colIndex * cubeSize, 0, -rowIndex * cubeSize]}
+            receiveShadow
+            castShadow
           >
             <meshStandardMaterial
               attach="material"
