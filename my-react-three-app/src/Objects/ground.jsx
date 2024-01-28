@@ -12,7 +12,7 @@ export function Ground(props) {
     normals
   ]);
 
-  const tilingScale = 500
+  const tilingScale = 1000
 
   colorMap = setTextureTiling(colorMap, tilingScale)
   normalMap = setTextureTiling(normalMap, tilingScale)
