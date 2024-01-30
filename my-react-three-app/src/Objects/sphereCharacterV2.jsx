@@ -1,8 +1,9 @@
 import * as THREE from "three";
 import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
-import { useKeyboardControls, SpotLight } from "@react-three/drei";
+import { useKeyboardControls, SpotLight, PositionalAudio } from "@react-three/drei";
 import { CapsuleCollider, RigidBody } from "@react-three/rapier";
+import audio from '../assets/music/background_music.mp3'
 
 const SPEED = 3;
 const direction = new THREE.Vector3();
@@ -12,6 +13,7 @@ export default function Player({ initialPosition }) {
   const ref = useRef();
   const meshRef = useRef();
   const spotLightRef = useRef();
+  const audioRef = useRef();
   const [, get] = useKeyboardControls();
   useFrame((state) => {
     const { forward, backward, left, right } = get();
@@ -35,7 +37,10 @@ export default function Player({ initialPosition }) {
     meshRef.current.rotation.copy(state.camera.rotation)
     meshRef.current.add(spotLightRef.current)
     meshRef.current.add(spotLightRef.current.target)
-    spotLightRef.current.target.position.z = -30
+    spotLightRef.current.target.position.z = -6
+    
+    // Update audio position as it is a positional audio
+    audioRef.current.position.copy(state.camera.position)
   });
   return (
     <>
@@ -49,7 +54,7 @@ export default function Player({ initialPosition }) {
       >
         <CapsuleCollider args={[0.1, 0.1]} />
       </RigidBody>
-      <mesh ref={meshRef} position={[initialPosition, 0, -1]}>
+      <mesh ref={meshRef}>
       </mesh>
       <SpotLight
         ref={spotLightRef}
@@ -60,6 +65,7 @@ export default function Player({ initialPosition }) {
         attenuation={5}
         castShadow // Enable shadows if needed
       />
+      <PositionalAudio ref={audioRef} autoplay loop url={audio} />
      
     </>
   );
