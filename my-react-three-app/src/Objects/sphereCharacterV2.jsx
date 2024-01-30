@@ -3,20 +3,31 @@ import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { useKeyboardControls, SpotLight, PositionalAudio } from "@react-three/drei";
 import { CapsuleCollider, RigidBody } from "@react-three/rapier";
-import audio from '../assets/music/background_music.mp3'
+import backgroundMusic from '../assets/music/background_music.mp3'
+import stepSoundEffect from '../assets/music/step.mp3'
 
 const SPEED = 3;
 const direction = new THREE.Vector3();
 const frontVector = new THREE.Vector3();
 const sideVector = new THREE.Vector3();
 export default function Player({ initialPosition }) {
+  // The rigidbody of the character
   const ref = useRef();
+  // The object used for updating the spotlight
   const meshRef = useRef();
+  // The spotlight
   const spotLightRef = useRef();
+  // The background music
   const audioRef = useRef();
+  // The steps sound effect
+  const stepAudioRef = useRef();
+
   const [, get] = useKeyboardControls();
   useFrame((state) => {
+
     const { forward, backward, left, right } = get();
+    // check if character is moving
+    const isMoving = forward || backward || left || right; 
     const velocity = ref.current.linvel();
     // update camera
     state.camera.position.set(...ref.current.translation());
@@ -41,6 +52,14 @@ export default function Player({ initialPosition }) {
     
     // Update audio position as it is a positional audio
     audioRef.current.position.copy(state.camera.position)
+    stepAudioRef.current.position.copy(state.camera.position)
+
+     // Play or pause step audio based on movement
+     if (isMoving && stepAudioRef.current && stepAudioRef.current.isPlaying === false) {
+      stepAudioRef.current.play();
+    } else if (!isMoving && stepAudioRef.current && stepAudioRef.current.isPlaying === true) {
+      stepAudioRef.current.pause();
+    }
   });
   return (
     <>
@@ -65,7 +84,8 @@ export default function Player({ initialPosition }) {
         attenuation={5}
         castShadow // Enable shadows if needed
       />
-      <PositionalAudio ref={audioRef} autoplay loop url={audio} />
+      <PositionalAudio ref={audioRef} autoplay loop url={backgroundMusic} />
+      <PositionalAudio ref={stepAudioRef} autoplay url={stepSoundEffect} />
      
     </>
   );
