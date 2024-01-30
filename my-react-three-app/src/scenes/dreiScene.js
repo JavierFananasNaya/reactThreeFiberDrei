@@ -28,12 +28,8 @@ function DreiScene() {
     <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade speed={1} />
     <ambientLight intensity={0.05}></ambientLight>
     <fog attach="fog" args={['#202020', 5, 15]} />
-    {/* <pointLight castShadow intensity={0.8} position={[100, 100, 100]} />*/}
-    {/* <directionalLight castShadow intensity={0.05} position={[100,100,100]}></directionalLight> */}
     <Physics gravity={[0, 0, 0]}>
-      {/* floor (need to make a component for the floor) */}
       <Ground/>
-      {/* end of floor */}
       <Player initialPosition={playerInitialPosition} />
       <Maze mazeData={mazeData}/>
     </Physics>

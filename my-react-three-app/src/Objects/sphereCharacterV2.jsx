@@ -30,12 +30,12 @@ export default function Player({ initialPosition }) {
 
     // Update spotlight
 
-    meshRef.current.position.copy(new THREE.Vector3(state.camera.position.x, state.camera.position.y -0.8, state.camera.position.z))
+    meshRef.current.position.copy(new THREE.Vector3(state.camera.position.x, state.camera.position.y -1, state.camera.position.z))
     meshRef.current.updateMatrix()
     meshRef.current.rotation.copy(state.camera.rotation)
     meshRef.current.add(spotLightRef.current)
     meshRef.current.add(spotLightRef.current.target)
-    spotLightRef.current.target.position.z = -5
+    spotLightRef.current.target.position.z = -30
   });
   return (
     <>
