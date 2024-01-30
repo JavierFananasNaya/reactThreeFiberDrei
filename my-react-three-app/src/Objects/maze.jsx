@@ -4,6 +4,7 @@ import normals from "../assets/bricks/normals_bricks.jpg";
 import React, { useRef } from "react";
 import { Box, useTexture } from "@react-three/drei";
 import { RigidBody } from "@react-three/rapier";
+import {setTextureTiling} from '../utils/texture_utils.ts'
 
 const Maze = ({ mazeData }) => {
   const mazeRef = useRef();
@@ -11,7 +12,13 @@ const Maze = ({ mazeData }) => {
   // Define the size of the cubes (walls)
   const cubeSize = 1;
 
-  const [colorMap, normalMap] = useTexture([diffuse, normals]);
+  let [colorMap, normalMap] = useTexture([diffuse, normals]);
+
+
+  const tilingScale = 1.5
+
+  colorMap = setTextureTiling(colorMap, tilingScale)
+  normalMap = setTextureTiling(normalMap, tilingScale)
 
   // Map the maze data to 3D cubes
   const cubes = mazeData.flatMap((row, rowIndex) =>
