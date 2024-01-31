@@ -5,12 +5,13 @@ import { Ground } from "../Objects/ground.jsx";
 import { Canvas } from "react-three-fiber";
 import Maze from "../Objects/maze.jsx";
 import {MazeGenerator} from "../utils/mazeGenerator.ts"
-import {getPlayerInitialPosition} from "../utils/utils.ts"
+import {getPlayerInitialPosition, getPickUpsPositions} from "../utils/utils.ts"
 
 const mazeRows = 51;
 const mazeCols = 51;
 const mazeGenerator = new MazeGenerator(mazeRows, mazeCols);
 const mazeData = mazeGenerator.generateMaze();
+const pickUpsPositions = getPickUpsPositions(6, mazeData);
 const playerInitialPosition = getPlayerInitialPosition(mazeData[1])
 
 function DreiScene() {
@@ -27,11 +28,10 @@ function DreiScene() {
     <Canvas shadows camera={{ fov: 45 }}>
     <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade speed={1} />
     <ambientLight intensity={0.05}></ambientLight>
-    <fog attach="fog" args={['#202020', 5, 15]} />
     <Physics gravity={[0, 0, 0]}>
       <Ground/>
       <Player initialPosition={playerInitialPosition} />
-      <Maze mazeData={mazeData}/>
+      <Maze mazeData={mazeData} pickUpsPositions={pickUpsPositions}/>
     </Physics>
     <PointerLockControls />
     </Canvas>
