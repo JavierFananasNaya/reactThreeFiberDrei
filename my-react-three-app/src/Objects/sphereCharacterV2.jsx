@@ -1,12 +1,13 @@
 import * as THREE from "three";
+import * as RAPIER from "@dimforge/rapier3d-compat"
 import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { useKeyboardControls, SpotLight, PositionalAudio } from "@react-three/drei";
-import { CapsuleCollider, RigidBody } from "@react-three/rapier";
+import { CapsuleCollider, RigidBody, useRapier } from "@react-three/rapier";
 import backgroundMusic from '../assets/music/background_music.mp3'
 import stepSoundEffect from '../assets/music/step.mp3'
 
-const SPEED = 3;
+const SPEED = 10;
 const direction = new THREE.Vector3();
 const frontVector = new THREE.Vector3();
 const sideVector = new THREE.Vector3();
@@ -21,11 +22,12 @@ export default function Player({ initialPosition }) {
   const audioRef = useRef();
   // The steps sound effect
   const stepAudioRef = useRef();
+  const rapier = useRapier()
 
   const [, get] = useKeyboardControls();
   useFrame((state) => {
 
-    const { forward, backward, left, right } = get();
+    const { forward, backward, left, right, jump } = get();
     // check if character is moving
     const isMoving = forward || backward || left || right; 
     const velocity = ref.current.linvel();
@@ -40,6 +42,12 @@ export default function Player({ initialPosition }) {
       .multiplyScalar(SPEED)
       .applyEuler(state.camera.rotation);
     ref.current.setLinvel({ x: direction.x, y: velocity.y, z: direction.z });
+
+        // jumping for debugging
+        const world = rapier.world.raw()
+        const ray = world.castRay(new RAPIER.Ray(ref.current.translation(), { x: 0, y: -1, z: 0 }))
+        const grounded = ray && ray.collider && Math.abs(ray.toi) <= 1.75
+        if (jump && grounded) ref.current.setLinvel({ x: 0, y: 7.5, z: 0 })
 
     // Update spotlight
 
