@@ -1,12 +1,12 @@
 import { KeyboardControls, Stars,PointerLockControls } from "@react-three/drei";
 import { Physics } from "@react-three/rapier";
-import Player from "../Objects/sphereCharacterV2";
+import Player from "../Objects/sphereCharacterV2.jsx";
 import { Ground } from "../Objects/ground.jsx";
 import { Canvas } from "react-three-fiber";
 import Maze from "../Objects/maze.jsx";
 import PickUps from "../Objects/pickUps.jsx";
-import {MazeGenerator} from "../utils/mazeGenerator.ts"
-import {getPlayerInitialPosition, getPickUpsPositions} from "../utils/utils.ts"
+import {MazeGenerator} from "../utils/mazeGenerator.js"
+import {getPlayerInitialPosition, getPickUpsPositions} from "../utils/utils.js"
 
 const mazeRows = 51;
 const mazeCols = 51;
@@ -15,7 +15,7 @@ const mazeData = mazeGenerator.generateMaze();
 const pickUpsPositions = getPickUpsPositions(6, mazeData);
 const playerInitialPosition = getPlayerInitialPosition(mazeData[1])
 
-function DreiScene() {
+const DreiScene = () => {
   return(
   <KeyboardControls
     map={[

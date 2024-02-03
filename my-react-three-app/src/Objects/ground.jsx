@@ -2,7 +2,7 @@ import diffuse from '../assets/ground/diffuse_ground.jpg'
 import normals from '../assets/ground/normal_ground.jpg'
 import { useTexture } from "@react-three/drei"
 import { CuboidCollider, RigidBody } from "@react-three/rapier"
-import {setTextureTiling} from '../utils/texture_utils.ts'
+import {setTextureTiling} from '../utils/texture_utils.js'
 
 
 export function Ground(props) {

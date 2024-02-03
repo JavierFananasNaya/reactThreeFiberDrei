@@ -4,7 +4,7 @@ import normals from "../assets/bricks/normals_bricks.jpg";
 import React, { useRef } from "react";
 import { Box, useTexture } from "@react-three/drei";
 import { RigidBody } from "@react-three/rapier";
-import { setTextureTiling } from "../utils/texture_utils.ts";
+import { setTextureTiling } from "../utils/texture_utils.js";
 
 const Maze = ({ mazeData }) => {
   const mazeRef = useRef();

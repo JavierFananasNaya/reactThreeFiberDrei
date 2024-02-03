@@ -5,19 +5,15 @@ const directions = [
   { dx: 2, dy: 0 }, // Right
 ];
 
-export class MazeGenerator {
-  width: number;
-  height: number;
-  grid: number[][];
-
-  constructor(width: number, height: number) {
+class MazeGenerator {
+  constructor(width, height) {
     this.width = width;
     this.height = height;
     this.grid = this.initializeGrid();
   }
 
-  private initializeGrid(): number[][] {
-    const grid: number[][] = [];
+  initializeGrid() {
+    const grid = [];
     for (let i = 0; i < this.height; i++) {
       grid[i] = new Array(this.width).fill(0);
     }
@@ -29,7 +25,7 @@ export class MazeGenerator {
     return this.grid;
   }
 
-  private recursiveBacktracking(x: number, y: number) {
+  recursiveBacktracking(x, y) {
     this.grid[y][x] = 1; // Mark the current cell as visited
 
     for (const dir of this.shuffle(directions)) {
@@ -44,7 +40,7 @@ export class MazeGenerator {
     }
   }
 
-  private shuffle<T>(array: T[]): T[] {
+  shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [array[i], array[j]] = [array[j], array[i]];
@@ -52,7 +48,9 @@ export class MazeGenerator {
     return array;
   }
 
-  private isInside(x: number, y: number): boolean {
+  isInside(x, y) {
     return x >= 0 && x < this.width && y >= 0 && y < this.height;
   }
 }
+
+export {MazeGenerator}
