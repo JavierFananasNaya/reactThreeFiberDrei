@@ -29,7 +29,7 @@ function DreiScene() {
     <Canvas shadows camera={{ fov: 45 }}>
     <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade speed={1} />
     <ambientLight intensity={0.05}></ambientLight>
-    <Physics gravity={[0, 0, 0]}>
+    <Physics gravity={[0, -9.8, 0]}>
       <Ground/>
       <Player initialPosition={playerInitialPosition} />
       <Maze mazeData={mazeData}/>

@@ -9,7 +9,7 @@ const PickUps = ({ pickUpsPositions }) => {
   const pickUps = pickUpsPositions.map((coordinates, index) => {
     const {row, col} = coordinates;
     return (
-      <RigidBody type="kinematicPosition" key={`${index}-rigidBody`}>
+      <RigidBody type="kinematicPosition" key={`${index}-rigidBody`} name='pickUp'>
         <Box
           key={`${index}`}
           args={[1, 2, 1]}

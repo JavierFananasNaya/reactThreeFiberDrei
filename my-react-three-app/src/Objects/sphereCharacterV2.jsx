@@ -7,6 +7,14 @@ import { CapsuleCollider, RigidBody, useRapier } from "@react-three/rapier";
 import backgroundMusic from '../assets/music/background_music.mp3'
 import stepSoundEffect from '../assets/music/step.mp3'
 
+const collisionHandler = (other) =>{
+ 
+  if(other.rigidBodyObject.name === 'pickUp'){
+    console.log(`He colisionado con ${other.rigidBodyObject.name}`)
+  }
+}
+
+
 const SPEED = 10;
 const direction = new THREE.Vector3();
 const frontVector = new THREE.Vector3();
@@ -80,6 +88,7 @@ export default function Player({ initialPosition }) {
         enabledRotations={[false, false, false]}
       >
         <CapsuleCollider args={[0.1, 0.1]} />
+        <CapsuleCollider type='static'  onCollisionEnter={(other) => {collisionHandler(other)}} args={[0.3, 0.3]} />
       </RigidBody>
       <mesh ref={meshRef}>
       </mesh>
