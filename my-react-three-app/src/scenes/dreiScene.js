@@ -4,6 +4,7 @@ import Player from "../Objects/sphereCharacterV2";
 import { Ground } from "../Objects/ground.jsx";
 import { Canvas } from "react-three-fiber";
 import Maze from "../Objects/maze.jsx";
+import PickUps from "../Objects/pickUps.jsx";
 import {MazeGenerator} from "../utils/mazeGenerator.ts"
 import {getPlayerInitialPosition, getPickUpsPositions} from "../utils/utils.ts"
 
@@ -31,7 +32,8 @@ function DreiScene() {
     <Physics gravity={[0, 0, 0]}>
       <Ground/>
       <Player initialPosition={playerInitialPosition} />
-      <Maze mazeData={mazeData} pickUpsPositions={pickUpsPositions}/>
+      <Maze mazeData={mazeData}/>
+      <PickUps pickUpsPositions={pickUpsPositions}/>
     </Physics>
     <PointerLockControls />
     </Canvas>
