@@ -7,6 +7,7 @@ import Maze from "../Objects/maze.jsx";
 import PickUps from "../Objects/pickUps.jsx";
 import {MazeGenerator} from "../utils/mazeGenerator.js"
 import {getPlayerInitialPosition, getPickUpsPositions} from "../utils/utils.js"
+import { PickUpsProvider } from "../assets/Contexts/pick_ups_context.tsx";
 
 const mazeRows = 51;
 const mazeCols = 51;
@@ -31,9 +32,11 @@ const DreiScene = () => {
     <ambientLight intensity={0.05}></ambientLight>
     <Physics gravity={[0, -9.8, 0]}>
       <Ground/>
-      <Player initialPosition={playerInitialPosition} />
-      <Maze mazeData={mazeData}/>
-      <PickUps pickUpsPositions={pickUpsPositions}/>
+      <PickUpsProvider pickUpsData={pickUpsPositions}>
+        <Player initialPosition={playerInitialPosition} />
+        <Maze mazeData={mazeData}/>
+        <PickUps pickUpsPositions={pickUpsPositions}/>
+      </PickUpsProvider>
     </Physics>
     <PointerLockControls />
     </Canvas>
