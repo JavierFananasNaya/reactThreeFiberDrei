@@ -10,6 +10,7 @@ import { pickUpsContext } from "../Contexts/pick_ups_context.tsx";
 
 const collisionEnterHandler = (other, setPickUps, setPickUpCount) =>{
   if(other.rigidBodyObject.name === 'pickUp'){
+    console.log(other)
     setPickUps((pickUps) => (pickUps.map((pickUp) =>{
         const pickUpPosition = {x: pickUp.position.col, y: 0, z: -pickUp.position.row}
         return {...pickUp, visible: pickUp.visible===false? false:!(JSON.stringify(other.colliderObject.position) === JSON.stringify(pickUpPosition))}

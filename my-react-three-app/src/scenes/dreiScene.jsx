@@ -16,6 +16,7 @@ import {
 } from "../utils/utils.js";
 import { PickUpsProvider } from "../Contexts/pick_ups_context.tsx";
 import Ui from "../Objects/ui.jsx";
+import { Suspense } from "react";
 
 const mazeRows = 51;
 const mazeCols = 51;
@@ -37,6 +38,7 @@ const DreiScene = () => {
     >
       <PickUpsProvider pickUpsData={pickUpsPositions}>
         <Canvas shadows camera={{ fov: 45 }}>
+          <Suspense fallback={null}>     
           <Stars
             radius={100}
             depth={50}
@@ -53,6 +55,7 @@ const DreiScene = () => {
             <Maze mazeData={mazeData} />
             <PickUpsComponent pickUpsPositions={pickUpsPositions} />
           </Physics>
+            </Suspense>
           <PointerLockControls />
         </Canvas>
         <Ui></Ui>
