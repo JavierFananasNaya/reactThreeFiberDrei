@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { pickUpsContext } from "../assets/Contexts/pick_ups_context.tsx";
+import { pickUpsContext } from "../Contexts/pick_ups_context.tsx";
 
 const Ui = () => {
   const {pickUpCount, pickUps} = useContext(pickUpsContext)

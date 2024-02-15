@@ -1,7 +1,7 @@
 import React, { useContext, useRef } from 'react';
 import { Box } from '@react-three/drei';
 import { RigidBody } from '@react-three/rapier';
-import { pickUpsContext } from '../assets/Contexts/pick_ups_context.tsx';
+import { pickUpsContext } from '../Contexts/pick_ups_context.tsx';
 
 const PickUpsComponent = () => {
   const pickUpsRef = useRef();

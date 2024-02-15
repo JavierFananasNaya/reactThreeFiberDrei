@@ -14,7 +14,7 @@ import {
   getPlayerInitialPosition,
   getPickUpsPositions,
 } from "../utils/utils.js";
-import { PickUpsProvider } from "../assets/Contexts/pick_ups_context.tsx";
+import { PickUpsProvider } from "../Contexts/pick_ups_context.tsx";
 import Ui from "../Objects/ui.jsx";
 
 const mazeRows = 51;

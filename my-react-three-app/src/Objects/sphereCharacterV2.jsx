@@ -6,7 +6,7 @@ import { useKeyboardControls, SpotLight, PositionalAudio } from "@react-three/dr
 import { CapsuleCollider, RigidBody, useRapier } from "@react-three/rapier";
 import backgroundMusic from '../assets/music/background_music.mp3'
 import stepSoundEffect from '../assets/music/step.mp3'
-import { pickUpsContext } from "../assets/Contexts/pick_ups_context.tsx";
+import { pickUpsContext } from "../Contexts/pick_ups_context.tsx";
 
 const collisionEnterHandler = (other, setPickUps, setPickUpCount) =>{
   if(other.rigidBodyObject.name === 'pickUp'){
