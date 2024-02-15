@@ -8,23 +8,13 @@ import backgroundMusic from '../assets/music/background_music.mp3'
 import stepSoundEffect from '../assets/music/step.mp3'
 import { pickUpsContext } from "../assets/Contexts/pick_ups_context.tsx";
 
-const collisionEnterHandler = (other, pickUpZone, setPickUpZone, setCollisioningPickUp ) =>{
+const collisionEnterHandler = (other, setPickUps, setPickUpCount) =>{
   if(other.rigidBodyObject.name === 'pickUp'){
-    console.log(`He colisionado con este pickup ${other.rigidBody.rawSet.ptr}`)
-    if(pickUpZone === false){
-      setPickUpZone(true)
-      setCollisioningPickUp(other.rigidBody.rawSet.ptr)
-    }
-  }
-}
-
-const collisionExitHandler = (other, pickUpZone, setPickUpZone, collisioningPickUp, setCollisioningPickUp ) =>{
-  if(other.rigidBody.rawSet.ptr === collisioningPickUp){
-    console.log(`He salido de este pickup ${other.rigidBody.rawSet.ptr}`)
-    if(pickUpZone === true){
-      setPickUpZone(false)
-      setCollisioningPickUp(undefined)
-    }
+    setPickUps((pickUps) => (pickUps.map((pickUp) =>{
+        const pickUpPosition = {x: pickUp.position.col, y: 0, z: -pickUp.position.row}
+        return {...pickUp, visible: pickUp.visible===false? false:!(JSON.stringify(other.colliderObject.position) === JSON.stringify(pickUpPosition))}
+      })))
+    setPickUpCount()
   }
 }
 
@@ -48,7 +38,7 @@ export default function Player({ initialPosition }) {
   const rapier = useRapier();
 
   // used for handling pickups
-  const {pickUpZone, collisioningPickUp, setCollisioningPickUp, setPickUpZone } = useContext(pickUpsContext)
+  const { setPickUps, setPickUpCount} = useContext(pickUpsContext)
 
   const [, get] = useKeyboardControls();
   useFrame((state) => {
@@ -106,7 +96,7 @@ export default function Player({ initialPosition }) {
         enabledRotations={[false, false, false]}
       >
         <CapsuleCollider args={[0.1, 0.1]} />
-        <CapsuleCollider sensor onIntersectionEnter={(other) => {collisionEnterHandler(other, pickUpZone, setPickUpZone, setCollisioningPickUp )}} onIntersectionExit={(other) => {collisionExitHandler(other, pickUpZone, setPickUpZone, collisioningPickUp, setCollisioningPickUp )}}  args={[1, 1]} />
+        <CapsuleCollider sensor onIntersectionEnter={(other) => {collisionEnterHandler(other, setPickUps, setPickUpCount )}}   args={[0.5, 0.5]} />
       </RigidBody>
       <mesh ref={meshRef}>
       </mesh>

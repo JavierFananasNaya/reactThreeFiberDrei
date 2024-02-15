@@ -1,35 +1,37 @@
-import React, { useRef } from "react";
-import { Box } from "@react-three/drei";
-import { RigidBody } from "@react-three/rapier";
+import React, { useContext, useRef } from 'react';
+import { Box } from '@react-three/drei';
+import { RigidBody } from '@react-three/rapier';
+import { pickUpsContext } from '../assets/Contexts/pick_ups_context.tsx';
 
-const PickUps = ({ pickUpsPositions }) => {
+const PickUpsComponent = () => {
   const pickUpsRef = useRef();
+  const { pickUps } = useContext(pickUpsContext);
 
-  // Map the pickUpsPositions to 3D objects
-  const pickUps = pickUpsPositions.map((coordinates, index) => {
-    const {row, col} = coordinates;
-    return (
-      <RigidBody type="kinematicPosition" key={`${index}-rigidBody`} name='pickUp'>
-        <Box
-          key={`${index}`}
-          args={[1, 2, 1]}
-          position={[col , 0, -row]}
-          receiveShadow
-          castShadow
-        >
-          <meshStandardMaterial attach="material" color="red" />
-        </Box>
-      </RigidBody>
-    );
+  // Map the pickUps positions to 3D objects
+  const pickUpsElements = pickUps.map((pickUp, index) => {
+    const { row, col } = pickUp.position;
+    if (pickUp.visible) {
+      return (
+        <RigidBody type="kinematicPosition" key={`${index}-rigidBody`} name="pickUp">
+          <Box
+            args={[1, 2, 1]}
+            position={[col, 0, -row]}
+            receiveShadow
+            castShadow
+          >
+            <meshStandardMaterial attach="material" color="red" />
+          </Box>
+        </RigidBody>
+      );
+    }
+    return null;
   });
 
   return (
-    <>
-      <group ref={pickUpsRef} key={"pickUps"}>
-        {pickUps}
-      </group>
-    </>
+    <group ref={pickUpsRef} key="pickUps">
+      {pickUpsElements}
+    </group>
   );
 };
 
-export default PickUps;
+export default PickUpsComponent;
