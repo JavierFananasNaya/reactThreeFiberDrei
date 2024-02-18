@@ -8,7 +8,7 @@ import { setTextureTiling } from "../utils/texture_utils.js";
 
 const Maze = ({ mazeData }) => {
   const mazeRef = useRef();
- 
+
   // Define the size of the cubes (walls)
   const cubeSize = 1;
 
