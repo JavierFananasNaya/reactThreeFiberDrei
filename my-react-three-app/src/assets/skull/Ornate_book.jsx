@@ -9,11 +9,24 @@ Title: Ornate Book
 
 import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
+import { useFrame } from '@react-three/fiber';
 
 export function Book(props) {
   const { nodes, materials } = useGLTF('/models/book/ornate_book.glb')
+
+  const ref = useRef();
+  // Rotate mesh every frame, this is called inside the animation loop
+  useFrame(() => {
+    // Ensure the mesh is loaded
+    if (ref.current) {
+      // Change these values to adjust the rotation speed and axis
+      ref.current.rotation.x += 0.01;
+      ref.current.rotation.y += 0.01;
+    }
+  });
+
   return (
-    <group {...props} dispose={null}>
+    <group ref={ref} {...props} dispose={null}>
       <group rotation={[-Math.PI / 2, 0, 0]}>
         <group position={[-275.852, -86.223, -351.945]}>
           <mesh geometry={nodes.Object_3.geometry} material={materials['02___Default']} />

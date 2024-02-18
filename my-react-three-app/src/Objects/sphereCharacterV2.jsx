@@ -6,20 +6,22 @@ import { useKeyboardControls, SpotLight, PositionalAudio } from "@react-three/dr
 import { CapsuleCollider, RigidBody, useRapier } from "@react-three/rapier";
 import backgroundMusic from '../assets/music/background_music.mp3'
 import stepSoundEffect from '../assets/music/step.mp3'
+import pickUpSoundEffect from '../assets/music/book_closing.mp3'
 import { pickUpsContext } from "../Contexts/pick_ups_context.tsx";
 
-const collisionEnterHandler = (other, setPickUps, setPickUpCount) =>{
+const collisionEnterHandler = (other, setPickUps, setPickUpCount, pickUpPlayer) =>{
   if(other.rigidBodyObject.name === 'pickUp'){
     setPickUps((pickUps) => (pickUps.map((pickUp) =>{
         const pickUpPosition = {x: pickUp.position.col, y: 0, z: -pickUp.position.row}
         return {...pickUp, visible: pickUp.visible===false? false:!(JSON.stringify(other.colliderObject.position) === JSON.stringify(pickUpPosition))}
       })))
     setPickUpCount()
+    pickUpPlayer.current.play()
   }
 }
 
 
-const SPEED = 10;
+const SPEED = 4;
 const direction = new THREE.Vector3();
 const frontVector = new THREE.Vector3();
 const sideVector = new THREE.Vector3();
@@ -34,6 +36,8 @@ export default function Player({ initialPosition }) {
   const audioRef = useRef();
   // The steps sound effect
   const stepAudioRef = useRef();
+  // The pickUp sound effect
+  const pickUpAudioRef = useRef();
   // This is rapier, used for jumping (debug purposes)
   const rapier = useRapier();
 
@@ -77,6 +81,7 @@ export default function Player({ initialPosition }) {
     // Update audio position as it is a positional audio
     audioRef.current.position.copy(state.camera.position)
     stepAudioRef.current.position.copy(state.camera.position)
+    pickUpAudioRef.current.position.copy(state.camera.position)
 
      // Play or pause step audio based on movement
      if (isMoving && stepAudioRef.current && stepAudioRef.current.isPlaying === false) {
@@ -96,7 +101,7 @@ export default function Player({ initialPosition }) {
         enabledRotations={[false, false, false]}
       >
         <CapsuleCollider args={[0.1, 0.1]} />
-        <CapsuleCollider sensor onIntersectionEnter={(other) => {collisionEnterHandler(other, setPickUps, setPickUpCount )}}   args={[0.5, 0.5]} />
+        <CapsuleCollider sensor onIntersectionEnter={(other) => {collisionEnterHandler(other, setPickUps, setPickUpCount, pickUpAudioRef )}}   args={[0.5, 0.5]} />
       </RigidBody>
       <mesh ref={meshRef}>
       </mesh>
@@ -112,6 +117,7 @@ export default function Player({ initialPosition }) {
       />
       <PositionalAudio ref={audioRef} autoplay loop url={backgroundMusic} />
       <PositionalAudio ref={stepAudioRef} autoplay url={stepSoundEffect} />
+      <PositionalAudio ref={pickUpAudioRef} loop={false} url={pickUpSoundEffect} />
      
     </>
   );

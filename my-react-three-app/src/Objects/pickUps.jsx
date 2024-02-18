@@ -14,7 +14,7 @@ const PickUpsComponent = () => {
     if (pickUp.visible) {
       return (
         <RigidBody type="kinematicPosition" key={`${index}-rigidBody`} name="pickUp">
-          <Book key={`${index}-book`} position={[col, 0.20, -row]} scale={0.0008} />
+          <Book key={`${index}-book`} position={[col, 0.20, -row]} scale={0.00045} />
           <Box
             args={[1, 2, 1]}
             position={[col, 0, -row]}
