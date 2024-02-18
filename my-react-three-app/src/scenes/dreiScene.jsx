@@ -17,6 +17,7 @@ import {
 import { PickUpsProvider } from "../Contexts/pick_ups_context.tsx";
 import Ui from "../Objects/ui.jsx";
 import { Suspense } from "react";
+import { EffectComposer, Vignette } from '@react-three/postprocessing';
 
 const mazeRows = 51;
 const mazeCols = 51;
@@ -57,6 +58,9 @@ const DreiScene = () => {
           </Physics>
             </Suspense>
           <PointerLockControls />
+        <EffectComposer>
+        <Vignette darkness={0.75} offset={0.5} />
+      </EffectComposer>
         </Canvas>
         <Ui></Ui>
       </PickUpsProvider>
