@@ -7,16 +7,20 @@ Source: https://sketchfab.com/3d-models/skull-downloadable-1a9db900738d44298b0bc
 Title: Skull downloadable
 */
 
-import React, { useRef } from 'react'
-import { useGLTF } from '@react-three/drei'
+import React, { useRef } from "react";
+import { useGLTF } from "@react-three/drei";
 
 export function Skull(props) {
-  const { nodes, materials } = useGLTF('/models/skull/skull_downloadable.glb')
+  const { nodes, materials } = useGLTF("/models/skull/skull_downloadable.glb");
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={nodes.Object_2.geometry} material={materials.defaultMat} rotation={[-Math.PI / 2, 0, 0]} />
+      <mesh
+        geometry={nodes.Object_2.geometry}
+        material={materials.defaultMat}
+        rotation={[-Math.PI / 2, 0, 0]}
+      />
     </group>
-  )
+  );
 }
 
-useGLTF.preload('/models/skull/skull_downloadable.glb')
+useGLTF.preload("/models/skull/skull_downloadable.glb");

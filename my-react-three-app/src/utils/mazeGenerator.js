@@ -53,4 +53,4 @@ class MazeGenerator {
   }
 }
 
-export {MazeGenerator}
+export { MazeGenerator };

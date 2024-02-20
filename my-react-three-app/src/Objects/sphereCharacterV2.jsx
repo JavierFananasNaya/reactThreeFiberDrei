@@ -156,12 +156,12 @@ export default function Player({ initialPosition }) {
       <SpotLight
         ref={spotLightRef}
         angle={Math.PI / 9}
-        penumbra={0.2} // Soften the edge of the light cone
-        intensity={0.6} // Set the light intensity
-        color="white" // Set the color of the light
+        penumbra={0.2}
+        intensity={0.5}
+        color="white"
         attenuation={5}
         distance={10}
-        castShadow // Enable shadows if needed
+        castShadow
       />
       <PositionalAudio ref={audioRef} autoplay loop url={backgroundMusic} />
       <PositionalAudio ref={stepAudioRef} autoplay url={stepSoundEffect} />

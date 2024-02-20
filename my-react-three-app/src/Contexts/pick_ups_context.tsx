@@ -21,9 +21,8 @@ export const PickUpsProvider = ({
   const [pickUpCount, setPickUpCountState] = useState<number>(0);
   const [pickUps, setPickUps] = useState<Array<any>>(pickUpsData);
 
-  
   const setPickUpCount = () => {
-    setPickUpCountState((count)=>( count+1));
+    setPickUpCountState((count) => count + 1);
   };
 
   return (
@@ -32,7 +31,7 @@ export const PickUpsProvider = ({
         pickUps,
         setPickUps,
         pickUpCount,
-        setPickUpCount
+        setPickUpCount,
       }}
     >
       {children}

@@ -15,7 +15,7 @@ export function getPickUpsPositions(numberOfPickUps, mazeData) {
   for (let i = 0; i < numberOfPickUps; i++) {
     let position = getNextPosition(mazeData);
     if (position) {
-      pickUpsPositions.push({position, visible: true});
+      pickUpsPositions.push({ position, visible: true });
     }
   }
   return pickUpsPositions;
