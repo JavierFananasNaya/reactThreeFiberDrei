@@ -14,7 +14,7 @@ const App = () => {
         <div className="mainMenu">
           <h1>The Maze Reacter</h1>
           <button className="playButton" onClick={startGame}>
-            Play
+            Accept the challenge
           </button>
         </div>
       )}
