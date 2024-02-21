@@ -1,6 +1,6 @@
 import * as THREE from "three";
-export const setTextureTiling = (texture, repeatFactor) => {
+export const setTextureTiling = (texture, repeatFactorX, repeatFactorY) => {
   texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-  texture.repeat.set(repeatFactor, repeatFactor);
+  texture.repeat.set(repeatFactorX, repeatFactorY);
   return texture;
 };

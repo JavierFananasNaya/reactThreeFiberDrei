@@ -14,10 +14,10 @@ const Maze = ({ mazeData }) => {
 
   let [colorMap, normalMap] = useTexture([diffuse, normals]);
 
-  const tilingScale = 1.5;
+  const tilingScale = 2;
 
-  colorMap = setTextureTiling(colorMap, tilingScale);
-  normalMap = setTextureTiling(normalMap, tilingScale);
+  colorMap = setTextureTiling(colorMap, tilingScale, tilingScale * 2);
+  normalMap = setTextureTiling(normalMap, tilingScale, tilingScale * 2);
 
   // Map the maze data to 3D cubes
   const cubes = mazeData.flatMap((row, rowIndex) =>
@@ -29,7 +29,7 @@ const Maze = ({ mazeData }) => {
         >
           <Box
             key={`${rowIndex}-${colIndex}`}
-            args={[cubeSize, cubeSize, cubeSize]}
+            args={[cubeSize, cubeSize * 1.5, cubeSize]}
             position={[colIndex * cubeSize, 0, -rowIndex * cubeSize]}
             receiveShadow
             castShadow

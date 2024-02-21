@@ -44,7 +44,7 @@ const collisionEnterHandler = (
   }
 };
 
-const SPEED = 4;
+const SPEED = 3;
 const direction = new THREE.Vector3();
 const frontVector = new THREE.Vector3();
 const sideVector = new THREE.Vector3();
@@ -138,7 +138,7 @@ export default function Player({ initialPosition }) {
         position={[initialPosition, 0, -1]}
         enabledRotations={[false, false, false]}
       >
-        <CapsuleCollider args={[0.1, 0.1]} />
+        <CapsuleCollider args={[0.1, 0.2]} />
         <CapsuleCollider
           sensor
           onIntersectionEnter={(other) => {

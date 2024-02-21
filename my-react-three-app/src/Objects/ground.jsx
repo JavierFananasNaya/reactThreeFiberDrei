@@ -1,7 +1,6 @@
 // import diffuse from "../assets/ground/diffuse_ground.jpg";
 // import normals from "../assets/ground/normal_ground.jpg";
 import diffuse from "../assets/dirt/Ground_Dirt_007_basecolor_2.jpg";
-import normals from "../assets/dirt/Ground_Dirt_007_normal.jpg";
 import ambientOclussion from "../assets/dirt/Ground_Dirt_007_ambientOcclusion.jpg";
 import roughness from "../assets/dirt/Ground_Dirt_007_roughness.jpg";
 import displacement from "../assets/dirt/Ground_Dirt_007_height.png";
@@ -11,9 +10,8 @@ import { CuboidCollider, RigidBody } from "@react-three/rapier";
 import { setTextureTiling } from "../utils/texture_utils.js";
 
 export function Ground(props) {
-  let [colorMap, normalMap, aoMap, roughnessMap, displacementMap] = useTexture([
+  let [colorMap, aoMap, roughnessMap, displacementMap] = useTexture([
     diffuse,
-    normals,
     ambientOclussion,
     roughness,
     displacement,
@@ -21,11 +19,10 @@ export function Ground(props) {
 
   const tilingScale = 900;
 
-  colorMap = setTextureTiling(colorMap, tilingScale);
-  normalMap = setTextureTiling(normalMap, tilingScale);
-  aoMap = setTextureTiling(aoMap, tilingScale);
-  roughnessMap = setTextureTiling(roughnessMap, tilingScale);
-  displacementMap = setTextureTiling(displacementMap, tilingScale);
+  colorMap = setTextureTiling(colorMap, tilingScale, tilingScale);
+  aoMap = setTextureTiling(colorMap, tilingScale, tilingScale);
+  roughnessMap = setTextureTiling(colorMap, tilingScale, tilingScale);
+  displacementMap = setTextureTiling(colorMap, tilingScale, tilingScale);
 
   return (
     <RigidBody {...props} type="fixed" colliders={false}>
@@ -34,7 +31,6 @@ export function Ground(props) {
         <meshStandardMaterial
           attach="material"
           map={colorMap}
-          normalMap={normalMap}
           aoMap={aoMap}
           roughnessMap={roughnessMap}
           displacementMap={displacementMap}
