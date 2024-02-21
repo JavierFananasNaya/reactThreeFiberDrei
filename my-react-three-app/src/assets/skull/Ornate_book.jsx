@@ -15,9 +15,7 @@ export function Book(props) {
   const { nodes, materials } = useGLTF("/models/book/ornate_book.glb");
 
   const ref = useRef();
-  // Rotate mesh every frame, this is called inside the animation loop
   useFrame(() => {
-    // Ensure the mesh is loaded
     if (ref.current) {
       // Change these values to adjust the rotation speed and axis
       ref.current.rotation.x += 0.01;
