@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Michroma&display=swap");
+
 .App {
   text-align: center;
   width: 100%;
@@ -16,7 +18,7 @@ body {
   background-image: url("./assets/images/mazeEntrance.jpg");
   background-size: cover;
   background-position: center;
-
+  font-family: "Michroma", sans-serif;
   h1 {
     font-size: 90px;
     margin: 0;
@@ -32,25 +34,24 @@ body {
     cursor: pointer;
     top: 40vh;
     position: relative;
-    transition: all 0.3s ease; /* Changed to all for transitioning other properties */
+    transition: all 0.3s ease;
     border: 2px solid #c7edef;
     background-color: rgba(128, 128, 128, 0.5);
-    border-radius: 9999px; /* Gives a pill shape */
+    border-radius: 9999px;
     text-align: center;
     color: #c7edef;
     font-size: 1rem;
     font-weight: bold;
-    font-family: "Your Fantasy Font", sans-serif; /* Match the font with the title */
+    font-family: "Michroma", sans-serif;
     outline: transparent;
     height: 60px;
     width: 300px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* Add shadow to button */
-
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     &:hover {
-      background-color: #505050; /* A lighter black for hover state */
+      background-color: black;
       color: #ffffff;
-      transform: translateY(-2px); /* Lift button up when hovered */
-      box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.3); /* Enhance shadow on hover */
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.3);
     }
   }
 }
