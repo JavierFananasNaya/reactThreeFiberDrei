@@ -12,7 +12,7 @@ const App = () => {
     <div className="App">
       {!isGameActive && (
         <div className="mainMenu">
-          <h1>The Maze Reacter</h1>
+          <h1>The Maze</h1>
           <button className="playButton" onClick={startGame}>
             Accept the challenge
           </button>

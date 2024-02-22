@@ -5,7 +5,9 @@ const Ui = () => {
   const { pickUpCount, pickUps } = useContext(pickUpsContext);
   return (
     <>
-      {<div className="ui">{`${pickUpCount} of ${pickUps.length} Books`}</div>}
+      {
+        <div className="ui">{`Books of awakening: ${pickUpCount}/${pickUps.length}`}</div>
+      }
     </>
   );
 };

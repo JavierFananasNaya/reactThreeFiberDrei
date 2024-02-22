@@ -72,7 +72,7 @@ const DreiScene = () => {
       </KeyboardControls>
     );
   } else {
-    return <VictoryScene />;
+    return <VictoryScene setVictory={setVictory} />;
   }
 };
 export default DreiScene;
