@@ -4,11 +4,22 @@
 .ui {
   color: white;
   padding: 10px;
-  // background-color: rgba(0, 0, 0, 0.5); // Optional: add background color
-  border-radius: 8px; // Optional: add border radius
   position: absolute;
   top: 10vh;
   left: 10vw;
   font-size: 2rem;
   font-family: "Italianno", "Michroma", sans-serif;
+  animation: ButtonFadeIn 7s ease-in-out forwards;
+}
+
+@keyframes TextFadeIn {
+  0% {
+    opacity: 0;
+  }
+  80% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

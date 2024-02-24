@@ -4,6 +4,7 @@ import {
   KeyboardControls,
   PointerLockControls,
   Stars,
+  Html,
 } from "@react-three/drei";
 import { Physics } from "@react-three/rapier";
 import { EffectComposer, Vignette } from "@react-three/postprocessing";
@@ -19,6 +20,7 @@ import PickUpsComponent from "../Objects/pickUps.jsx";
 import Player from "../Objects/sphereCharacterV2.jsx";
 import Ui from "../Objects/ui.jsx";
 import { VictoryScene } from "./victory.jsx";
+import "./dreiScene.scss";
 
 const mazeRows = 51;
 const mazeCols = 51;
@@ -43,7 +45,13 @@ const DreiScene = () => {
       >
         <PickUpsProvider pickUpsData={pickUpsPositions} setVictory={setVictory}>
           <Canvas shadows camera={{ fov: 45 }}>
-            <Suspense fallback={null}>
+            <Suspense
+              fallback={
+                <Html center className="loading-text">
+                  <div>Loading...</div>
+                </Html>
+              }
+            >
               <Stars
                 radius={100}
                 depth={50}
