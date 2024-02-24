@@ -4,7 +4,12 @@ import { Html } from "@react-three/drei";
 import victoryBackgroundMusic from "../assets/music/victory_background_sound.mp3";
 import "./victory.scss";
 
-export const VictoryScene = ({ setVictory }) => {
+const playAgain = (setVictory, setTimeLeft, minutes) => {
+  setVictory(false);
+  setTimeLeft(minutes * 60);
+};
+
+export const VictoryScene = ({ setVictory, setTimeLeft, minutes }) => {
   const [showText, setShowText] = useState(true);
 
   useEffect(() => {
@@ -17,7 +22,10 @@ export const VictoryScene = ({ setVictory }) => {
       <Canvas>
         <Html center>
           {showText && <p className="thought-text">"Uh... What a dream..."</p>}
-          <button className="playAgainButton" onClick={() => setVictory(false)}>
+          <button
+            className="playAgainButton"
+            onClick={() => playAgain(setVictory, setTimeLeft, minutes)}
+          >
             Fall asleep again
           </button>
         </Html>

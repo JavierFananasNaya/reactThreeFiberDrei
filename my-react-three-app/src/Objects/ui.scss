@@ -5,9 +5,31 @@
   color: white;
   padding: 10px;
   position: absolute;
-  top: 10vh;
-  left: 10vw;
+  top: 5vh;
+  left: 5vw;
   font-size: 2rem;
+  font-family: "Italianno", "Michroma", sans-serif;
+  animation: ButtonFadeIn 7s ease-in-out forwards;
+}
+
+@keyframes TextFadeIn {
+  0% {
+    opacity: 0;
+  }
+  80% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.ui-time {
+  color: white;
+  padding: 10px;
+  position: absolute;
+  top: 5vh;
+  right: 5vw;
+  font-size: 3rem;
   font-family: "Italianno", "Michroma", sans-serif;
   animation: ButtonFadeIn 7s ease-in-out forwards;
 }
