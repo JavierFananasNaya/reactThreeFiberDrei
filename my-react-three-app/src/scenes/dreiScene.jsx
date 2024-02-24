@@ -1,24 +1,23 @@
+import { useState, Suspense } from "react";
+import { Canvas } from "@react-three/fiber";
 import {
   KeyboardControls,
-  Stars,
   PointerLockControls,
+  Stars,
 } from "@react-three/drei";
 import { Physics } from "@react-three/rapier";
-import Player from "../Objects/sphereCharacterV2.jsx";
-import { Ground } from "../Objects/ground.jsx";
-import { Canvas } from "react-three-fiber";
-import Maze from "../Objects/maze.jsx";
-import PickUpsComponent from "../Objects/pickUps.jsx";
+import { EffectComposer, Vignette } from "@react-three/postprocessing";
+import { PickUpsProvider } from "../Contexts/pick_ups_context.tsx";
 import { MazeGenerator } from "../utils/mazeGenerator.js";
 import {
   getPlayerInitialPosition,
   getPickUpsPositions,
 } from "../utils/utils.js";
-import { PickUpsProvider } from "../Contexts/pick_ups_context.tsx";
+import { Ground } from "../Objects/ground.jsx";
+import Maze from "../Objects/maze.jsx";
+import PickUpsComponent from "../Objects/pickUps.jsx";
+import Player from "../Objects/sphereCharacterV2.jsx";
 import Ui from "../Objects/ui.jsx";
-import { Suspense } from "react";
-import { EffectComposer, Vignette } from "@react-three/postprocessing";
-import { useState } from "react";
 import { VictoryScene } from "./victory.jsx";
 
 const mazeRows = 51;

@@ -9,7 +9,7 @@ import { useTexture } from "@react-three/drei";
 import { CuboidCollider, RigidBody } from "@react-three/rapier";
 import { setTextureTiling } from "../utils/texture_utils.js";
 
-export function Ground(props) {
+export const Ground = (props) => {
   let [colorMap, aoMap, roughnessMap, displacementMap] = useTexture([
     diffuse,
     ambientOclussion,
@@ -39,4 +39,4 @@ export function Ground(props) {
       <CuboidCollider args={[1000, 2, 1000]} position={[0, -2, 0]} />
     </RigidBody>
   );
-}
+};
