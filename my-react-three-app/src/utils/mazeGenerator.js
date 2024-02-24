@@ -22,6 +22,7 @@ class MazeGenerator {
 
   generateMaze() {
     this.recursiveBacktracking(1, 1);
+    this.createRandomPaths(40);
     return this.grid;
   }
 
@@ -36,6 +37,49 @@ class MazeGenerator {
         // Carve a path
         this.grid[y + dir.dy / 2][x + dir.dx / 2] = 1;
         this.recursiveBacktracking(newX, newY);
+      }
+    }
+  }
+
+  createRandomPaths(numberOfPaths) {
+    let availableWalls = [];
+
+    // Identify potential walls to convert into paths, excluding the border
+    for (let i = 2; i < this.height - 2; i += 2) {
+      for (let j = 2; j < this.width - 2; j += 2) {
+        if (this.grid[i][j] === 0) {
+          availableWalls.push({ x: j, y: i });
+        }
+      }
+    }
+
+    // Shuffle the array of walls to ensure randomness
+    this.shuffle(availableWalls);
+
+    // Convert the specified number of walls into paths and ensure connectivity
+    for (let i = 0; i < Math.min(numberOfPaths, availableWalls.length); i++) {
+      let wall = availableWalls[i];
+      this.grid[wall.y][wall.x] = 1; // Convert the wall into a path
+
+      // Ensure connectivity by checking adjacent cells and converting one if necessary
+      let neighbors = [
+        { dx: 0, dy: -1 }, // Up
+        { dx: 0, dy: 1 }, // Down
+        { dx: -1, dy: 0 }, // Left
+        { dx: 1, dy: 0 }, // Right
+      ];
+
+      this.shuffle(neighbors); // Shuffle neighbors to randomize the direction of connectivity
+
+      for (const dir of neighbors) {
+        const newX = wall.x + dir.dx;
+        const newY = wall.y + dir.dy;
+
+        // Check if the neighbor is a wall and within bounds, then convert it into a path
+        if (this.isInside(newX, newY) && this.grid[newY][newX] === 0) {
+          this.grid[newY][newX] = 1;
+          break; // Break after converting one neighbor to ensure only one path is created for connectivity
+        }
       }
     }
   }

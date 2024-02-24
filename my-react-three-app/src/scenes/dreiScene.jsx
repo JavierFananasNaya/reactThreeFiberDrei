@@ -26,7 +26,7 @@ const mazeRows = 51;
 const mazeCols = 51;
 const mazeGenerator = new MazeGenerator(mazeRows, mazeCols);
 const mazeData = mazeGenerator.generateMaze();
-const pickUpsPositions = getPickUpsPositions(2, mazeData);
+const pickUpsPositions = getPickUpsPositions(10, mazeData);
 const playerInitialPosition = getPlayerInitialPosition(mazeData[1]);
 
 const DreiScene = () => {
@@ -62,7 +62,7 @@ const DreiScene = () => {
                 speed={1}
               />
               <ambientLight intensity={0.05}></ambientLight>
-              <Physics gravity={[0, -9.8, 0]}>
+              <Physics gravity={[0, 0, 0]}>
                 <Ground />
                 <Player initialPosition={playerInitialPosition} />
                 <Maze mazeData={mazeData} />
