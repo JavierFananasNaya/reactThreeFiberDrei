@@ -12,18 +12,18 @@ export const timerContext = createContext<TimerContextProps>(
 export const TimerProvider = ({
   children,
   initialTimeLeft = 10,
-  setVictory,
+  setDeath,
 }: {
   children: React.ReactNode;
   initialTimeLeft: number;
-  setVictory: React.Dispatch<React.SetStateAction<boolean>>;
+  setDeath: React.Dispatch<React.SetStateAction<boolean>>;
 }): JSX.Element => {
   const [timeLeft, setTimeLeft] = useState<number>(initialTimeLeft * 60);
 
   useEffect(() => {
     // Exit early when we reach 0
     if (timeLeft === 0) {
-      setVictory(true);
+      setDeath(true);
     }
 
     // Save intervalId to clear the interval when the component re-renders

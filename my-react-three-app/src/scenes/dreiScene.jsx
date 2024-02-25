@@ -21,6 +21,7 @@ import PickUpsComponent from "../Objects/pickUps.jsx";
 import Player from "../Objects/sphereCharacterV2.jsx";
 import Ui from "../Objects/ui.jsx";
 import { VictoryScene } from "./victory.jsx";
+import { DeathScene } from "./death.jsx";
 import "./dreiScene.scss";
 
 const mazeRows = 51;
@@ -28,13 +29,14 @@ const mazeCols = 51;
 const minutes = 10;
 const mazeGenerator = new MazeGenerator(mazeRows, mazeCols);
 const mazeData = mazeGenerator.generateMaze();
-const pickUpsPositions = getPickUpsPositions(10, mazeData);
+const pickUpsPositions = getPickUpsPositions(8, mazeData);
 const playerInitialPosition = getPlayerInitialPosition(mazeData[1]);
 
 const DreiScene = () => {
   const [victory, setVictory] = useState(false);
+  const [death, setDeath] = useState(false);
 
-  if (!victory) {
+  if (!victory & !death) {
     return (
       <KeyboardControls
         map={[
@@ -76,14 +78,16 @@ const DreiScene = () => {
               <Vignette darkness={0.75} offset={0.5} />
             </EffectComposer>
           </Canvas>
-          <TimerProvider initialTimeLeft={minutes} setVictory={setVictory}>
+          <TimerProvider initialTimeLeft={minutes} setDeath={setDeath}>
             <Ui></Ui>
           </TimerProvider>
         </PickUpsProvider>
       </KeyboardControls>
     );
-  } else {
-    return <VictoryScene setVictory={setVictory} minutes={minutes} />;
+  } else if (victory) {
+    return <VictoryScene setVictory={setVictory} />;
+  } else if (death) {
+    return <DeathScene setDeath={setDeath} />;
   }
 };
 export default DreiScene;
