@@ -1,4 +1,4 @@
-import { useState, Suspense, useEffect } from "react";
+import { useState, Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import {
   KeyboardControls,
@@ -9,6 +9,7 @@ import {
 import { Physics } from "@react-three/rapier";
 import { EffectComposer, Vignette } from "@react-three/postprocessing";
 import { PickUpsProvider } from "../Contexts/pick_ups_context.tsx";
+import { TimerProvider } from "../Contexts/timer_context.tsx";
 import { MazeGenerator } from "../utils/mazeGenerator.js";
 import {
   getPlayerInitialPosition,
@@ -32,23 +33,6 @@ const playerInitialPosition = getPlayerInitialPosition(mazeData[1]);
 
 const DreiScene = () => {
   const [victory, setVictory] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(minutes * 60);
-
-  useEffect(() => {
-    // Exit early when we reach 0
-    if (timeLeft === 0) {
-      return;
-    }
-
-    // Save intervalId to clear the interval when the component re-renders
-    const intervalId = setInterval(() => {
-      // Decrease time left by one second
-      setTimeLeft(timeLeft - 1);
-    }, 1000);
-
-    // Clear interval on re-render to avoid memory leaks
-    return () => clearInterval(intervalId);
-  }, [timeLeft]);
 
   if (!victory) {
     return (
@@ -92,18 +76,14 @@ const DreiScene = () => {
               <Vignette darkness={0.75} offset={0.5} />
             </EffectComposer>
           </Canvas>
-          <Ui timeLeft={timeLeft}></Ui>
+          <TimerProvider initialTimeLeft={minutes} setVictory={setVictory}>
+            <Ui></Ui>
+          </TimerProvider>
         </PickUpsProvider>
       </KeyboardControls>
     );
   } else {
-    return (
-      <VictoryScene
-        setVictory={setVictory}
-        setTimeLeft={setTimeLeft}
-        minutes={minutes}
-      />
-    );
+    return <VictoryScene setVictory={setVictory} minutes={minutes} />;
   }
 };
 export default DreiScene;
