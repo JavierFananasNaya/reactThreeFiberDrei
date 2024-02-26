@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
 import { Html } from "@react-three/drei";
-import victoryBackgroundMusic from "../assets/music/victory_background_sound.mp3";
+import victoryBackgroundMusic from "../assets/music/victory_background_Sound.mp3";
 import "./victory.scss";
 
 const playAgain = (setVictory) => {

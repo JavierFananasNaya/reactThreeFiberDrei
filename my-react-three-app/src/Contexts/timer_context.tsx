@@ -34,7 +34,7 @@ export const TimerProvider = ({
 
     // Clear interval on re-render to avoid memory leaks
     return () => clearInterval(intervalId);
-  }, [timeLeft]);
+  }, [timeLeft, setDeath]);
 
   return (
     <timerContext.Provider
