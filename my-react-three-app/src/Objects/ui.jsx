@@ -3,7 +3,7 @@ import { pickUpsContext } from "../Contexts/pick_ups_context.tsx";
 import "./ui.scss";
 import { timerContext } from "../Contexts/timer_context.tsx";
 
-const Ui = () => {
+export const Ui = () => {
   const { pickUpCount, pickUps } = useContext(pickUpsContext);
   const { timeLeft } = useContext(timerContext);
   const minutes = Math.floor(timeLeft / 60).toString();
@@ -17,4 +17,3 @@ const Ui = () => {
   );
 };
 
-export default Ui;
