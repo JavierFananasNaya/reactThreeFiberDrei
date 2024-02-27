@@ -26,12 +26,14 @@ import "./dreiScene.scss";
 
 const mazeRows = 51;
 const mazeCols = 51;
-const minutes = 0.5;
+const minutes = 10;
 const mazeGenerator = new MazeGenerator(mazeRows, mazeCols);
 const mazeData = mazeGenerator.generateMaze();
 const pickUpsPositions = getPickUpsPositions(8, mazeData);
 const playerInitialPosition = getPlayerInitialPosition(mazeData[1]);
 
+const queryParams = new URLSearchParams(window.location.search);
+const isDebugEnabled = queryParams.get("debug") === "true";
 const DreiScene = () => {
   const [victory, setVictory] = useState(false);
   const [death, setDeath] = useState(false);
@@ -67,9 +69,12 @@ const DreiScene = () => {
             <ambientLight intensity={0.05}></ambientLight>
             <Physics gravity={[0, -9.8, 0]}>
               <Ground />
-              <Player initialPosition={playerInitialPosition} />
+              <Player
+                initialPosition={playerInitialPosition}
+                isDebug={isDebugEnabled}
+              />
               <Maze mazeData={mazeData} />
-              <PickUpsComponent pickUpsPositions={pickUpsPositions} />
+              <PickUpsComponent isDebug={isDebugEnabled} />
             </Physics>
           </Suspense>
           <PointerLockControls />

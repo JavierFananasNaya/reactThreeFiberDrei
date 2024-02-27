@@ -22,7 +22,7 @@ export const VictoryScene = ({ setVictory }) => {
         <Html center>
           {showText && <p className="thought-text">"Uh... What a dream..."</p>}
           <button
-            className="playAgainButton"
+            className="playAgainVictoryButton"
             onClick={() => playAgain(setVictory)}
           >
             Fall asleep again

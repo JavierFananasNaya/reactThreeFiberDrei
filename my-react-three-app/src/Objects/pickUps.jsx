@@ -4,7 +4,7 @@ import { RigidBody } from "@react-three/rapier";
 import { pickUpsContext } from "../Contexts/pick_ups_context.tsx";
 import { Book } from "../assets/skull/Ornate_book.jsx";
 
-const PickUpsComponent = () => {
+const PickUpsComponent = ({ isDebug }) => {
   const pickUpsRef = useRef();
   const { pickUps } = useContext(pickUpsContext);
 
@@ -29,14 +29,24 @@ const PickUpsComponent = () => {
             receiveShadow
             visible={true}
           >
-            <meshStandardMaterial
-              castShadow={false}
-              receiveShadow={false}
-              attach="material"
-              color="black"
-              transparent
-              opacity={0}
-            />
+            {isDebug && (
+              <meshStandardMaterial
+                castShadow={false}
+                receiveShadow={false}
+                attach="material"
+                color="red"
+              />
+            )}
+            {!isDebug && (
+              <meshStandardMaterial
+                castShadow={false}
+                receiveShadow={false}
+                attach="material"
+                color="black"
+                transparent
+                opacity={0}
+              />
+            )}
           </Box>
         </RigidBody>
       );

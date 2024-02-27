@@ -48,7 +48,7 @@ const SPEED = 3;
 const direction = new THREE.Vector3();
 const frontVector = new THREE.Vector3();
 const sideVector = new THREE.Vector3();
-export default function Player({ initialPosition }) {
+export default function Player({ initialPosition, isDebug }) {
   // The rigidbody of the character
   const ref = useRef();
   // The object used for updating the spotlight
@@ -91,7 +91,8 @@ export default function Player({ initialPosition }) {
       new RAPIER.Ray(ref.current.translation(), { x: 0, y: -1, z: 0 })
     );
     const grounded = ray && ray.collider && Math.abs(ray.toi) <= 1.75;
-    if (jump && grounded) ref.current.setLinvel({ x: 0, y: 7.5, z: 0 });
+    if (jump && grounded && isDebug)
+      ref.current.setLinvel({ x: 0, y: 7.5, z: 0 });
 
     // Update spotlight
 
